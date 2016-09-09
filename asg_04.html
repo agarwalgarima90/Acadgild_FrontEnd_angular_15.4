@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html ng-app="acadgild">
+	<head>
+		<title>Assignment 15.4</title>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.2.1/angular.min.js"></script>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.2.1/angular-route.min.js"></script>
+		<script>
+			var myapp = angular.module('acadgild', ['ngRoute']);
+
+			myapp.controller('mycontroller1', function($scope) {
+				$scope.ctrlFn = function(test) {
+					alert(test);
+				}
+			});
+
+			myapp.directive("ngDisplay", function() {
+				return {
+					scope: {
+						someCtrlFn : '&callbackFn'
+					},
+					link: function(scope, ele, attr) {
+						scope.someCtrlFn({arg1:22});
+					}
+				};
+			});
+		</script>
+	</head>
+	<body>
+		<div ng-controller="mycontroller1">
+			<div ng-display callback-fn="ctrlFn(arg1)"></div>
+		</div>
+	</body>
+</html>
